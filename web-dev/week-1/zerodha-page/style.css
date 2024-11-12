@@ -1,0 +1,102 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap');
+
+* {
+    font-family: Inter, Haettenschweiler, 'Arial Narrow Bold', sans-serif
+}
+
+body {
+    color: #424242;
+    overflow: auto;
+}
+
+a {
+    text-decoration: none;
+}
+
+img {
+    max-width: 100%
+}
+
+.navbar {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    position: fixed;
+    padding-left: 200px;
+    padding-right: 200px;
+    z-index: 10;
+    height: 60px;
+    top: 0;
+    width: 100%;
+    background-color: #fff;
+    box-shadow: 2px 1px 2px #eee;
+    box-sizing: border-box;
+}
+
+.navbar img {
+    max-height: 17px;
+    vertical-align: middle;
+    cursor: pointer;
+}
+
+.navbar ul {
+    list-style: none;
+    display: flex;
+    flex-direction: row;
+    margin: 0;
+    padding-left: 450px;
+    height: 100%;
+    align-items: center;
+    text-wrap: wrap;
+}
+
+.navbar-links li a {
+    color: #666;
+    font-size: .9rem;
+    transition: color .3s;
+    display: inline-block;
+    padding: 20px;
+    box-sizing: border-box;
+
+}
+
+.main {
+    position: relative;
+    text-align: center;
+}
+
+.main img {
+    padding-top: 100px;
+    margin-bottom: 60px;
+    max-height: 45vh;
+}
+
+.main h1 {
+    margin-bottom: 0;
+    font-size: 2.75rem;
+    line-height: 1.25;
+}
+
+.main p {
+    font-size: 1.2rem;
+}
+
+.main a {
+    margin-top: 25px;
+    background-color: #387ed1;
+    color: #fff;
+    border: 1px solid rgba(0, 0, 0, 0) !important;
+    border-radius: 3px;
+    display: inline-block;
+    padding: 10px 30px;
+    text-align: center;
+    font-size: 1.2em;
+    line-height: 1.2em;
+    font-weight: 500;
+    text-decoration: none;
+    white-space: nowrap;
+    border-radius: 3px;
+    border: 1px solid #bbb;
+    cursor: pointer;
+    box-sizing: border-box;
+}
