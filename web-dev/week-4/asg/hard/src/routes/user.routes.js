@@ -23,9 +23,14 @@ router.post("/signup", async (req, res) => {
       email,
       password: hashedPassword,
     });
-
+    const accessToken = generateAccessToken(newUser);
+    const refreshToken = generateRefreshToken(newUser);
     res.status(201).json({
       message: "You registered successfully.",
+      tokens: {
+        accessToken,
+        refreshToken,
+      },
     });
   } catch (error) {
     res.status(500).json({
@@ -45,16 +50,13 @@ router.post("/login", async (req, res) => {
     }
     const isValid = await bcrypt.compare(password, user.password);
     if (isValid) {
-      const token = jwt.sign(
-        { userId: user._id },
-        process.env.ACCESS_TOKEN_SECRET,
-        { expiresIn: "24h" }
-      );
-      res.cookie("token", token, {
-        httpOnly: true,
-        // secure: process.env.NODE_ENV === "production",
-        sameSite: "strict",
-        maxAge: 24 * 60 * 60 * 1000, // 24 hours
+      const accessToken = generateAccessToken(user);
+      const refreshToken = generateRefreshToken(user);
+      await User.findByIdAndUpdate(user._id, {
+        tokens: {
+          accessToken,
+          refreshToken,
+        },
       });
       return res.status(200).json({
         message: "You are logged in successfully.",
