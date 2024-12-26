@@ -125,7 +125,9 @@
                     password: password
                 })
                 if (response) {
-                    localStorage.setItem("token", response.token)
+                    // console.log(response);
+                    console.log(response?.data?.token);
+                    localStorage.setItem("token", response?.data?.token)
                     alert("you are logged in")
                 }
             } catch (error) {
@@ -133,6 +135,23 @@
                 alert("Login failed. Please try again.");
             }
         }
+        async function getUserInfo() {
+            try {
+                const token = localStorage.getItem("token");
+                const response = await axios.get("http://localhost:3000/me", {
+                    headers: {
+                        Authorization: `Bearer ${token}`
+                    }
+                });
+
+                if (response) {
+                    alert("lol you reached here")
+                }
+            } catch (error) {
+                console.error("Error while authentication:", error)
+            }
+        }
+        getUserInfo()
     </script>
 </body>
 
