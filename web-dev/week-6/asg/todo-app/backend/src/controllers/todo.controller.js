@@ -1,4 +1,5 @@
-import Todo from "../models/todo.mdoel";
+import Todo from "../models/todo.model.js";
+
 const getTodos = async (req, res) => {
   const user = req.user;
   try {
@@ -12,8 +13,9 @@ const getTodos = async (req, res) => {
     });
   }
 };
+
 const getTodoById = async (req, res) => {
-  const todoId = req.query.todo_id;
+  const todoId = req.params.id;
   try {
     const todo = await Todo.findById(todoId);
     if (!todo) {
@@ -30,6 +32,7 @@ const getTodoById = async (req, res) => {
     });
   }
 };
+
 const createTodo = async (req, res) => {
   const { title, description } = req.body;
   const user = req.user;
@@ -49,8 +52,9 @@ const createTodo = async (req, res) => {
     });
   }
 };
+
 const editTodo = async (req, res) => {
-  const todoId = req.query.todo_id;
+  const todoId = req.params.id;
   const { title, description } = req.body;
   const user = req.user;
   try {
@@ -60,9 +64,10 @@ const editTodo = async (req, res) => {
         message: "Todo not found",
       });
     }
-    const editedTodo = await Todo.updateOne(
-      { _id: todo },
-      { title, description }
+    const editedTodo = await Todo.findByIdAndUpdate(
+      todoId,
+      { title, description },
+      { new: true }
     );
     return res.status(200).json({
       message: "Todo updated",
@@ -74,8 +79,9 @@ const editTodo = async (req, res) => {
     });
   }
 };
+
 const deleteTodo = async (req, res) => {
-  const todoId = req.query.todo_id;
+  const todoId = req.params.id;
   try {
     const todo = await Todo.findById(todoId);
     if (!todo) {
@@ -83,7 +89,7 @@ const deleteTodo = async (req, res) => {
         message: "Todo not found",
       });
     }
-    await Todo.deleteOne({ _id: todoId });
+    await Todo.findByIdAndDelete(todoId);
     return res.status(200).json({
       message: "Todo deleted",
     });
@@ -93,4 +99,5 @@ const deleteTodo = async (req, res) => {
     });
   }
 };
+
 export { getTodos, getTodoById, createTodo, editTodo, deleteTodo };

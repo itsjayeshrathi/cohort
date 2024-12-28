@@ -1,5 +1,5 @@
 import cron from "node-cron";
-import { generateRefreshToken } from "../utils/auth";
+import { generateRefreshToken } from "../utils/auth.js";
 const setupRefreshTokenCron = (userRepository) => {
   cron.schedule("0 0 * * *", async () => {
     try {
