@@ -17,13 +17,10 @@ const Todo = mongoose.model("Todo", todoSchema);
 
 const connectToDB = async () => {
   try {
-    await mongoose.connect(
-      "mongodb+srv://itsjayeshrathi:lnFyBo1UTrCTlvBk@cluster.bxpqt.mongodb.net/mongo",
-      {
-        useNewUrlParser: true,
-        useUnifiedTopology: true,
-      }
-    );
+    await mongoose.connect(process.env.DB_STRING, {
+      useNewUrlParser: true,
+      useUnifiedTopology: true,
+    });
     console.log("Connected to the database");
   } catch (error) {
     console.error("Error connecting to the database:", error);
