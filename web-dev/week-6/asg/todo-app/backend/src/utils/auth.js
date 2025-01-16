@@ -16,6 +16,7 @@ const generateRefreshToken = (userId) => {
   console.log("in jwt 2");
   return jwt.sign({ userId }, process.env.REFRESH_TOKEN_SECRET);
 };
+
 const verifyRefreshToken = (token) => {
   return jwt.verify(token, process.env.REFRESH_TOKEN_SECRET);
 };
